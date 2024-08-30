@@ -235,6 +235,157 @@
             margin-bottom: 20px;
         }
 
+        /* Masonry Grid Styles */
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 15px;
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .masonry-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .masonry-description {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Tabbed Navigation Styles */
+        .tabs {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tab-link {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        .tab-link:hover {
+            background-color: #ddd;
+        }
+
+        .tab-link.active {
+            background-color: #ccc;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeEffect 1s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Horizontal Scroll Styles */
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .project-horizontal {
+            flex: 0 0 auto;
+            width: 300px;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-horizontal img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .horizontal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .horizontal-description {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 15px;
+            text-align: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .accordion-button:hover {
+            background-color: #ddd;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 15px;
+            background-color: white;
+        }
+
+        .accordion-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
         /* Lightbox Styles */
         .lightbox {
             display: none;
@@ -328,6 +479,9 @@
             .lightbox {
                 padding: 20px;
             }
+            .masonry-grid {
+                column-count: 1;
+            }
         }
     </style>
 </head>
@@ -348,6 +502,7 @@
     <p>[Summary of skills, specialisations, and design philosophy.]</p>
 </section>
 
+<!-- Grid with Hover Effects -->
 <section id="portfolio">
     <h2>Portfolio</h2>
     <p class="section-description">Explore the project gallery where each thumbnail expands with a hover effect to reveal project details. Click on any thumbnail to view detailed project information, including images, descriptions, and sketches or plans.</p>
@@ -370,6 +525,7 @@
     </div>
 </section>
 
+<!-- Carousel -->
 <section id="portfolio-carousel">
     <h2>Portfolio Carousel</h2>
     <p class="section-description">This section features projects presented as interactive carousels, allowing you to browse through multiple images, descriptions, and design details within each project.</p>
@@ -405,6 +561,137 @@
             </div>
             <p class="carousel-title">Project 3</p>
             <p class="carousel-description">[Brief description of Project 3]</p>
+        </div>
+    </div>
+</section>
+
+<!-- Masonry Grid -->
+<section id="portfolio-masonry">
+    <h2>Masonry Grid Portfolio</h2>
+    <p class="section-description">Explore the projects in a dynamic masonry grid layout, where each project adjusts its size to fit the content, creating a visually appealing, staggered arrangement.</p>
+    <div class="masonry-grid">
+        <div class="masonry-item">
+            <img src="[Year]/Project_1.jpg" alt="Project 1">
+            <p class="masonry-title">Project 1</p>
+            <p class="masonry-description">[Brief description of Project 1]</p>
+        </div>
+        <div class="masonry-item">
+            <img src="[Year]/Project_2.jpg" alt="Project 2">
+            <p class="masonry-title">Project 2</p>
+            <p class="masonry-description">[Brief description of Project 2]</p>
+        </div>
+        <div class="masonry-item">
+            <img src="[Year]/Project_3.jpg" alt="Project 3">
+            <p class="masonry-title">Project 3</p>
+            <p class="masonry-description">[Brief description of Project 3]</p>
+        </div>
+    </div>
+</section>
+
+<!-- Tabbed Navigation -->
+<section id="portfolio-tabs">
+    <h2>Tabbed Portfolio</h2>
+    <p class="section-description">Navigate through different categories of projects using tabs. Each tab represents a different theme, year, or project type.</p>
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'Tab1')">Year 1</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab2')">Year 2</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab3')">Year 3</button>
+    </div>
+
+    <div id="Tab1" class="tab-content">
+        <div class="grid">
+            <div class="project-card">
+                <img src="[Year]/Project_1.jpg" alt="Project 1">
+                <p class="project-title">Project 1</p>
+                <p class="project-description">[Brief description of Project 1]</p>
+            </div>
+            <div class="project-card">
+                <img src="[Year]/Project_2.jpg" alt="Project 2">
+                <p class="project-title">Project 2</p>
+                <p class="project-description">[Brief description of Project 2]</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="Tab2" class="tab-content" style="display:none">
+        <div class="grid">
+            <div class="project-card">
+                <img src="[Year]/Project_3.jpg" alt="Project 3">
+                <p class="project-title">Project 3</p>
+                <p class="project-description">[Brief description of Project 3]</p>
+            </div>
+            <div class="project-card">
+                <img src="[Year]/Project_4.jpg" alt="Project 4">
+                <p class="project-title">Project 4</p>
+                <p class="project-description">[Brief description of Project 4]</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="Tab3" class="tab-content" style="display:none">
+        <div class="grid">
+            <div class="project-card">
+                <img src="[Year]/Project_5.jpg" alt="Project 5">
+                <p class="project-title">Project 5</p>
+                <p class="project-description">[Brief description of Project 5]</p>
+            </div>
+            <div class="project-card">
+                <img src="[Year]/Project_6.jpg" alt="Project 6">
+                <p class="project-title">Project 6</p>
+                <p class="project-description">[Brief description of Project 6]</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Horizontal Scroll -->
+<section id="portfolio-horizontal">
+    <h2>Horizontal Scroll Portfolio</h2>
+    <p class="section-description">Browse through the projects by scrolling horizontally. This layout is ideal for showcasing wide images or a panoramic view of designs.</p>
+    <div class="horizontal-scroll">
+        <div class="project-horizontal">
+            <img src="[Year]/Project_1.jpg" alt="Project 1">
+            <p class="horizontal-title">Project 1</p>
+            <p class="horizontal-description">[Brief description of Project 1]</p>
+        </div>
+        <div class="project-horizontal">
+            <img src="[Year]/Project_2.jpg" alt="Project 2">
+            <p class="horizontal-title">Project 2</p>
+            <p class="horizontal-description">[Brief description of Project 2]</p>
+        </div>
+        <div class="project-horizontal">
+            <img src="[Year]/Project_3.jpg" alt="Project 3">
+            <p class="horizontal-title">Project 3</p>
+            <p class="horizontal-description">[Brief description of Project 3]</p>
+        </div>
+    </div>
+</section>
+
+<!-- Accordion Layout -->
+<section id="portfolio-accordion">
+    <h2>Accordion Portfolio</h2>
+    <p class="section-description">Click on a project title to expand and view more details, including images, descriptions, and other relevant information.</p>
+    <div class="accordion">
+        <div class="accordion-item">
+            <button class="accordion-button">Project 1</button>
+            <div class="accordion-content">
+                <img src="[Year]/Project_1.jpg" alt="Project 1">
+                <p>[Detailed description of Project 1]</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-button">Project 2</button>
+            <div class="accordion-content">
+                <img src="[Year]/Project_2.jpg" alt="Project 2">
+                <p>[Detailed description of Project 2]</p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button class="accordion-button">Project 3</button>
+            <div class="accordion-content">
+                <img src="[Year]/Project_3.jpg" alt="Project 3">
+                <p>[Detailed description of Project 3]</p>
+            </div>
         </div>
     </div>
 </section>
@@ -476,6 +763,34 @@
             const x = e.pageX - carousel.offsetLeft;
             const walk = (x - startX) * 3; //scroll-fast
             carousel.scrollLeft = scrollLeft - walk;
+        });
+    });
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    const accordionButtons = document.querySelectorAll(".accordion-button");
+
+    accordionButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            this.classList.toggle("active");
+            const content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
         });
     });
 </script>
