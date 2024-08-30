@@ -1,3 +1,6 @@
+Here's the updated version with three projects named 1, 2, and 3 in the portfolio section:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,7 +258,9 @@
             transition-delay: 1s;
         }
         footer.loaded {
-            opacity: 1;
+            opacity:
+
+ 1;
             transform: translateY(0);
         }
 
@@ -299,12 +304,21 @@
 <section id="portfolio">
     <h2>Portfolio</h2>
     <div class="grid">
-        <div class="project-card" onclick="openLightbox('[Year]', '[Project_Title]')">
-            <img src="[Year]/[Project_Title]_cover.jpg" alt="[Project_Title] Cover" class="project-cover">
-            <div class="project-summary">[Brief project description highlighting key aspects and approach.]</div>
-            <p class="project-title">[Project_Title]</p>
+        <div class="project-card" onclick="openLightbox('[Year]', 'Project_1')">
+            <img src="[Year]/Project_1_cover.jpg" alt="Project 1 Cover" class="project-cover">
+            <div class="project-summary">[Brief project description for Project 1.]</div>
+            <p class="project-title">Project 1</p>
         </div>
-        <!-- Repeat similar structure for additional projects -->
+        <div class="project-card" onclick="openLightbox('[Year]', 'Project_2')">
+            <img src="[Year]/Project_2_cover.jpg" alt="Project 2 Cover" class="project-cover">
+            <div class="project-summary">[Brief project description for Project 2.]</div>
+            <p class="project-title">Project 2</p>
+        </div>
+        <div class="project-card" onclick="openLightbox('[Year]', 'Project_3')">
+            <img src="[Year]/Project_3_cover.jpg" alt="Project 3 Cover" class="project-cover">
+            <div class="project-summary">[Brief project description for Project 3.]</div>
+            <p class="project-title">Project 3</p>
+        </div>
     </div>
 </section>
 
@@ -348,3 +362,6 @@
 
 </body>
 </html>
+```
+
+In this version, the portfolio section contains three projects named "Project 1," "Project 2," and "Project 3." Each project has a placeholder for the cover image, project description, and title.
