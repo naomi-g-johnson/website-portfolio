@@ -258,7 +258,7 @@
             column-count: 3;
             column-gap: 15px;
         }
-
+        
         .masonry-item {
             break-inside: avoid;
             margin-bottom: 15px;
@@ -267,24 +267,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
+        
         .masonry-item img {
             width: 100%;
             height: auto;
             border-radius: 8px;
             margin-bottom: 10px;
         }
-
+        
         .masonry-title {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 5px;
         }
-
+        
         .masonry-description {
             font-size: 14px;
             color: #555;
         }
+
 
         /* Tabbed Navigation Styles */
         .tabs {
@@ -604,28 +605,49 @@
 
 
 
-<!-- Masonry Grid -->
 <section id="portfolio-masonry">
     <h2>Masonry Grid Portfolio</h2>
     <p class="section-description">Explore the projects in a dynamic masonry grid layout, where each project adjusts its size to fit the content, creating a visually appealing, staggered arrangement.</p>
     <div class="masonry-grid">
-        <div class="masonry-item">
+        <!-- Large project card -->
+        <div class="masonry-item" style="height: 400px;">
             <img src="[Year]/Project_1.jpg" alt="Project 1">
             <p class="masonry-title">Project 1</p>
-            <p class="masonry-description">[Brief description of Project 1]</p>
+            <p class="masonry-description">[A detailed description for Project 1 that takes up more space and showcases a larger project card.]</p>
         </div>
-        <div class="masonry-item">
+        <!-- Medium project card -->
+        <div class="masonry-item" style="height: 300px;">
             <img src="[Year]/Project_2.jpg" alt="Project 2">
             <p class="masonry-title">Project 2</p>
-            <p class="masonry-description">[Brief description of Project 2]</p>
+            <p class="masonry-description">[A concise description for Project 2, showing a medium-sized project card.]</p>
         </div>
-        <div class="masonry-item">
+        <!-- Small project card -->
+        <div class="masonry-item" style="height: 250px;">
             <img src="[Year]/Project_3.jpg" alt="Project 3">
             <p class="masonry-title">Project 3</p>
-            <p class="masonry-description">[Brief description of Project 3]</p>
+            <p class="masonry-description">[A brief description for Project 3, resulting in a smaller project card.]</p>
+        </div>
+        <!-- Another large project card -->
+        <div class="masonry-item" style="height: 400px;">
+            <img src="[Year]/Project_4.jpg" alt="Project 4">
+            <p class="masonry-title">Project 4</p>
+            <p class="masonry-description">[Another detailed description for a larger project card.]</p>
+        </div>
+        <!-- Another small project card -->
+        <div class="masonry-item" style="height: 250px;">
+            <img src="[Year]/Project_5.jpg" alt="Project 5">
+            <p class="masonry-title">Project 5</p>
+            <p class="masonry-description">[Brief description for Project 5, keeping the card smaller.]</p>
+        </div>
+        <!-- Medium project card -->
+        <div class="masonry-item" style="height: 300px;">
+            <img src="[Year]/Project_6.jpg" alt="Project 6">
+            <p class="masonry-title">Project 6</p>
+            <p class="masonry-description">[Medium-sized description for Project 6.]</p>
         </div>
     </div>
 </section>
+
 
 <!-- Tabbed Navigation -->
 <section id="portfolio-tabs">
@@ -768,33 +790,36 @@
         }, 500); // Match with transition duration
     }
 
-    let slideIndex = 1;
-    showSlides(slideIndex);
+    let slideIndices = [1, 1, 1];
+    let slideClassNames = ["carousel-slide", "carousel-slide", "carousel-slide"];
+    showSlides(1, 0);
+    showSlides(1, 1);
+    showSlides(1, 2);
     
-    function changeSlide(n) {
-        showSlides(slideIndex += n);
+    function changeSlide(n, no) {
+        showSlides(slideIndices[no] += n, no);
     }
     
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
+    function currentSlide(n, no) {
+        showSlides(slideIndices[no] = n, no);
     }
     
-    function showSlides(n) {
+    function showSlides(n, no) {
         let i;
-        let slides = document.getElementsByClassName("carousel-slide");
+        let slides = document.getElementsByClassName(slideClassNames[no]);
         let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}    
-        if (n < 1) {slideIndex = slides.length}
+        if (n > slides.length) {slideIndices[no] = 1}    
+        if (n < 1) {slideIndices[no] = slides.length}
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";  
         }
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[slideIndex-1].style.display = "block";  
-        dots[slideIndex-1].className += " active";
+        slides[slideIndices[no]-1].style.display = "block";  
+        dots[slideIndices[no]].className += " active";
     }
-    
+
     window.addEventListener('load', () => {
         document.querySelectorAll('header, section, footer').forEach(el => el.classList.add('loaded'));
     });
