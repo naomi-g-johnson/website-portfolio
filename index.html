@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - [Name]</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f0f0f0 0%, #ffffff 100%);
+            color: #333;
+            line-height: 1.6;
+            transition: background-color 0.5s ease;
+            background-size: cover;
+        }
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        header.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        header h1 {
+            font-size: 32px;
+            margin: 5px 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: color 0.3s ease;
+        }
+        header p {
+            font-size: 18px;
+            margin: 5px 0;
+            font-weight: 300;
+            color: #bbb;
+            transition: color 0.3s ease;
+        }
+        header .contact-info {
+            margin-top: 10px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        header .contact-info a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background-color: #333;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+        header .contact-info a:hover {
+            background-color: #555;
+            transform: scale(1.1);
+            border: 2px solid #777;
+        }
+        header .separator {
+            display: inline-block;
+            width: 2px;
+            height: 15px;
+            background-color: #666;
+            margin: 0 10px;
+        }
+        section {
+            margin: 50px 20px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInSlideUp 1s ease forwards;
+            background-size: cover;
+            animation-delay: 0.5s;
+        }
+        section.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section h2 {
+            font-size: 30px;
+            margin-bottom: 30px;
+            color: #222;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        /* Grid Layout Styles */
+        .grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .project-card {
+            width: 300px;
+            height: 400px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e0e0e0;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            background-color: #ededed;
+        }
+        .project-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover .project-cover {
+            transform: scale(1.05);
+        }
+        .project-summary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            transition: opacity 0.3s ease;
+            font-size: 16px;
+            line-height: 1.4;
+            box-sizing: border-box;
+            border-radius: 15px;
+        }
+        .project-card:hover .project-summary {
+            opacity: 1;
+        }
+        .project-title {
+            font-size: 20px;
+            font-weight: 500;
+            padding: 15px;
+            color: #333;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .project-card:hover .project-title {
+            background-color: #ededed;
+            color: #111;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .lightbox-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .lightbox iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .lightbox-close:hover {
+            background-color: #ddd;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 14px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition-delay: 1s;
+        }
+        footer.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .contact-info {
+                flex-direction: column;
+            }
+            header .separator {
+                width: 100%;
+                height: 2px;
+                margin: 5px 0;
+            }
+            .project-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            .lightbox {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>[Name]</h1>
+    <p>[Qualifications]</p>
+    <div class="contact-info">
+        <a href="mailto:[email@example.com]">Email</a>
+        <a href="[LinkedIn URL]" target="_blank">LinkedIn</a>
+    </div>
+</header>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>[Brief introduction and overview of experience, background, and approach to design.]</p>
+    <p>[Summary of skills, specialisations, and design philosophy.]</p>
+</section>
+
+<section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="grid">
+        <div class="project-card" onclick="openLightbox('[Year]', '[Project_Title]')">
+            <img src="[Year]/[Project_Title]_cover.jpg" alt="[Project_Title] Cover" class="project-cover">
+            <div class="project-summary">[Brief project description highlighting key aspects and approach.]</div>
+            <p class="project-title">[Project_Title]</p>
+        </div>
+        <!-- Repeat similar structure for additional projects -->
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 [Name]. All rights reserved.</p>
+</footer>
+
+<!-- Lightbox Container -->
+<div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <iframe id="lightboxIframe" src="" title="Full Screen View"></iframe>
+    </div>
+</div>
+
+<script>
+    function openLightbox(year, project) {
+        const lightbox = document.getElementById('lightbox');
+        const iframe = document.getElementById('lightboxIframe');
+        iframe.src = `${year}/${project}_portfolio.pdf`;
+        lightbox.style.display = 'flex';
+        setTimeout(() => {
+            lightbox.classList.add('active');
+        }, 10); // Delay to trigger transition
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            const iframe = document.getElementById('lightboxIframe');
+            iframe.src = ''; // Clear the iframe source when closing
+        }, 500); // Match with transition duration
+    }
+
+    window.addEventListener('load', () => {
+        document.querySelectorAll('header, section, footer').forEach(el => el.classList.add('loaded'));
+    });
+</script>
+
+</body>
+</html>
