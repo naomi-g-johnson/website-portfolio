@@ -189,51 +189,69 @@
             color: #111;
         }
 
-        /* Carousel Styles */
-        .carousel {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
         .carousel-container {
-            width: 300px;
+            position: relative;
+            max-width: 300px;
+            margin: auto;
             text-align: center;
-            margin: 20px;
         }
-
-        .carousel-project {
-            display: flex;
-            overflow-x: scroll;
-            gap: 10px;
-        }
-
-        .carousel-project img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
+        
+        .carousel-slide {
+            width: 100%;
+            height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+        }
+        
+        .carousel-prev, .carousel-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .carousel-prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .carousel-next {
+            right: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .carousel-prev:hover, .carousel-next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .carousel-dots {
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .carousel-dots .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        
+        .carousel-dots .dot.active {
+            background-color: #717171;
         }
 
-        .carousel-project img:hover {
-            transform: scale(1.05);
-        }
-
-        .carousel-title {
-            font-size: 20px;
-            margin: 10px 0;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .carousel-description {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
-        }
 
         /* Masonry Grid Styles */
         .masonry-grid {
@@ -525,45 +543,27 @@
     </div>
 </section>
 
-<!-- Carousel -->
 <section id="portfolio-carousel">
     <h2>Portfolio Carousel</h2>
     <p class="section-description">This section features projects presented as interactive carousels, allowing you to browse through multiple images, descriptions, and design details within each project.</p>
-    <div class="carousel">
-        <!-- Project 1 Carousel -->
-        <div class="carousel-container">
-            <div class="carousel-project">
-                <img src="[Year]/Project_1_image1.jpg" alt="Project 1 Image 1">
-                <img src="[Year]/Project_1_image2.jpg" alt="Project 1 Image 2">
-                <img src="[Year]/Project_1_image3.jpg" alt="Project 1 Image 3">
-            </div>
-            <p class="carousel-title">Project 1</p>
-            <p class="carousel-description">[Brief description of Project 1]</p>
+    <div class="carousel-container">
+        <div class="carousel-project">
+            <img src="[Year]/Project_1_image1.jpg" alt="Project 1 Image 1" class="carousel-slide">
+            <img src="[Year]/Project_1_image2.jpg" alt="Project 1 Image 2" class="carousel-slide" style="display:none;">
+            <img src="[Year]/Project_1_image3.jpg" alt="Project 1 Image 3" class="carousel-slide" style="display:none;">
         </div>
-        
-        <!-- Project 2 Carousel -->
-        <div class="carousel-container">
-            <div class="carousel-project">
-                <img src="[Year]/Project_2_image1.jpg" alt="Project 2 Image 1">
-                <img src="[Year]/Project_2_image2.jpg" alt="Project 2 Image 2">
-                <img src="[Year]/Project_2_image3.jpg" alt="Project 2 Image 3">
-            </div>
-            <p class="carousel-title">Project 2</p>
-            <p class="carousel-description">[Brief description of Project 2]</p>
+        <button class="carousel-prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="carousel-next" onclick="changeSlide(1)">&#10095;</button>
+        <div class="carousel-dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
         </div>
-        
-        <!-- Project 3 Carousel -->
-        <div class="carousel-container">
-            <div class="carousel-project">
-                <img src="[Year]/Project_3_image1.jpg" alt="Project 3 Image 1">
-                <img src="[Year]/Project_3_image2.jpg" alt="Project 3 Image 2">
-                <img src="[Year]/Project_3_image3.jpg" alt="Project 3 Image 3">
-            </div>
-            <p class="carousel-title">Project 3</p>
-            <p class="carousel-description">[Brief description of Project 3]</p>
-        </div>
+        <p class="carousel-title">Project 1</p>
+        <p class="carousel-description">[Brief description of Project 1]</p>
     </div>
 </section>
+
 
 <!-- Masonry Grid -->
 <section id="portfolio-masonry">
@@ -729,34 +729,61 @@
         }, 500); // Match with transition duration
     }
 
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function changeSlide(n) {
+        showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("carousel-slide");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+    }
+    
     window.addEventListener('load', () => {
         document.querySelectorAll('header, section, footer').forEach(el => el.classList.add('loaded'));
     });
-
+    
     const carousels = document.querySelectorAll('.carousel-project');
-
+    
     carousels.forEach(carousel => {
         let isDown = false;
         let startX;
         let scrollLeft;
-
+    
         carousel.addEventListener('mousedown', (e) => {
             isDown = true;
             carousel.classList.add('active');
             startX = e.pageX - carousel.offsetLeft;
             scrollLeft = carousel.scrollLeft;
         });
-
+    
         carousel.addEventListener('mouseleave', () => {
             isDown = false;
             carousel.classList.remove('active');
         });
-
+    
         carousel.addEventListener('mouseup', () => {
             isDown = false;
             carousel.classList.remove('active');
         });
-
+    
         carousel.addEventListener('mousemove', (e) => {
             if (!isDown) return;
             e.preventDefault();
@@ -765,7 +792,7 @@
             carousel.scrollLeft = scrollLeft - walk;
         });
     });
-
+    
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tab-content");
@@ -779,9 +806,9 @@
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-
+    
     const accordionButtons = document.querySelectorAll(".accordion-button");
-
+    
     accordionButtons.forEach(button => {
         button.addEventListener("click", function() {
             this.classList.toggle("active");
